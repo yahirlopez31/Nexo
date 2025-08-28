@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from config import config
 
 nexoApp = Flask(__name__) 
 
