@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2025 a las 01:06:29
+-- Tiempo de generación: 28-08-2025 a las 23:39:12
 -- Versión del servidor: 8.0.43
 -- Versión de PHP: 7.4.9
 
@@ -29,12 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `usuario` (
   `id` int NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `correo` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `clave` varchar(200) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `telefono` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `direccion` text COLLATE utf8mb4_spanish_ci NOT NULL,
-  `perfil` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'U'
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `correo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `clave` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `perfil` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'U'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --

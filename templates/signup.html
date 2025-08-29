@@ -1,16 +1,12 @@
 {% extends "layout.html" %}
-{% block titulo %}Registrarse - nexo{% endblock %}
+{% block titulo %}Registrarse - Nexo{% endblock %}
 {% block contenido %}
 
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
   <div class="row align-items-center g-lg-5 py-5">
     <div class="col-lg-7 text-center text-lg-start">
-      <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
-        Crea tu cuenta
-      </h1>
-      <p class="col-lg-10 fs-4">
-        Regístrate para acceder a todas las funciones de nuestra plataforma.
-      </p>
+      <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Crea tu cuenta</h1>
+      <p class="col-lg-10 fs-4">Regístrate para acceder a todas las funciones de nuestra plataforma.</p>
     </div>
     <div class="col-md-10 mx-auto col-lg-5">
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" method="POST" action="/signup">
@@ -19,7 +15,7 @@
           <label for="signupName">Nombre completo</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="signupEmail" name="Correo" placeholder="name@example.com" required>
+          <input type="email" class="form-control" id="signupEmail" name="correo" placeholder="name@example.com" required>
           <label for="signupEmail">Correo electrónico</label>
         </div>
         <div class="form-floating mb-3">
@@ -27,12 +23,12 @@
           <label for="signupPassword">Contraseña</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" id="signuPhone" name="telefono" required>
-          <label for="signupPhone">Telefono</label>
+          <input type="text" class="form-control" id="signupPhone" name="telefono" placeholder="Telefono" required>
+          <label for="signupPhone">Teléfono</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="signuDireccion" name="direccion"  required>
-          <label for="signupDireccion">Direccion</label>
+          <input type="text" class="form-control" id="signupAddress" name="direccion" placeholder="Direccion" required>
+          <label for="signupAddress">Dirección</label>
         </div>
         <button class="w-100 btn btn-lg btn-success" type="submit">Registrarse</button>
         <hr class="my-4">
