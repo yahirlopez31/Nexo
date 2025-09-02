@@ -2,29 +2,35 @@ from flask import Flask, render_template, request, redirect, url_for
 from config import config
 from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
+from models.entities.User import User
+from models.ModelUser import ModelUser 
+from flask_login import login_manager, login_user, logout_user, login_required
 
-# Configuración de Flask y MySQL
+
+
+
 nexoApp = Flask(__name__)
 nexoApp.config.from_object(config['development'])
 db = MySQL(nexoApp)
 
-# Página principal
+
+signinManager =login_manager(nexoApp)
 @nexoApp.route('/')
 def home():
     return render_template('home.html')
 
-# Iniciar sesión
+
 @nexoApp.route('/signin', methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
         correo = request.form.get("correo")
         clave = request.form.get("clave")
-        # Aquí iría la lógica para verificar usuario y contraseña
+        
         print(f"Iniciar sesión con: {correo}, {clave}")
         return redirect(url_for("home"))
     return render_template('signin.html')
 
-# Registrarse
+
 @nexoApp.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
