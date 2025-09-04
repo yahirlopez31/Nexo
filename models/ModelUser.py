@@ -21,7 +21,7 @@ class ModelUser:
             selUsuario.execute("SELECT * FROM usuario WHERE id = %s", (id,))
             u = selUsuario.fetchone()
             if u is not None:
-                return User(u[0], u[1], u[2], u[3], u[4])  # Aquí no validamos clave
+                return User(u[0], u[1], u[2], u[3], u[4])
             else:
                 return None
         except Exception as ex:

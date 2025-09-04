@@ -9,6 +9,18 @@
       <p class="col-lg-10 fs-4">Regístrate para acceder a todas las funciones de nuestra plataforma.</p>
     </div>
     <div class="col-md-10 mx-auto col-lg-5">
+      <!-- Mostrar mensajes flash de error o éxito -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" method="POST" action="/signup">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="signupName" name="nombre" placeholder="Tu nombre" required>

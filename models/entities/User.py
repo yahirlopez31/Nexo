@@ -1,7 +1,7 @@
 import hashlib
 
 class User:
-    def __init__(self, id, nombre, correo, clave, rol):
+    def __init__(self, id, nombre, correo, clave, perfil):
         self.id = id
         self.nombre = nombre
         self.correo = correo

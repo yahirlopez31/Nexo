@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2025 a las 23:39:12
+-- Tiempo de generación: 04-09-2025 a las 23:37:26
 -- Versión del servidor: 8.0.43
 -- Versión de PHP: 7.4.9
 
@@ -29,11 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `usuario` (
   `id` int NOT NULL,
-  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `correo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `clave` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `perfil` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT 'U'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+  `nombre` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `perfil` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Índices para tablas volcadas

@@ -4,17 +4,21 @@ from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
 from models.entities.User import User
 from models.ModelUser import ModelUser 
-from flask_login import login_manager, login_user, logout_user, login_required
-
-
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 
 nexoApp = Flask(__name__)
 nexoApp.config.from_object(config['development'])
 db = MySQL(nexoApp)
 
+signinManager = LoginManager()
+signinManager.init_app(nexoApp)
+signinManager.login_view = "signin" 
 
-signinManager =login_manager(nexoApp)
+@signinManager.user_loader
+def load_user(user_id):
+    return ModelUser.get_by_id(db, user_id)
+
 @nexoApp.route('/')
 def home():
     return render_template('home.html')
@@ -40,18 +44,18 @@ def signup():
         telefono = request.form.get("telefono")
         direccion = request.form.get("direccion")
 
-        # Validación básica
+        
         if not nombre or not correo or not clave or not telefono or not direccion:
             return "Faltan datos en el formulario", 400
 
-        # Cifrar contraseña
+        
         claveCifrada = generate_password_hash(clave)
-        perfil = 'U'  # Valor por defecto
+        perfil = 'U'  
 
-        # Depuración
+        
         print("Datos a insertar:", nombre.upper(), correo, claveCifrada, telefono, direccion, perfil)
 
-        # Guardar usuario en la base de datos
+        
         cursor = db.connection.cursor()
         cursor.execute(
             "INSERT INTO usuario (nombre, correo, clave, telefono, direccion, perfil) VALUES (%s, %s, %s, %s, %s, %s)",
@@ -64,6 +68,6 @@ def signup():
 
     return render_template('signup.html')
 
-# Ejecutar la app
+
 if __name__ == '__main__':
     nexoApp.run(debug=True, port=7777)
