@@ -13,13 +13,20 @@
       </p>
     </div>
     <div class="col-md-10 mx-auto col-lg-5">
+
+      {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      {% endif %}
+
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" method="POST" action="/signin">
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="signinEmail" name="email" placeholder="name@example.com" required>
+          <input type="email" class="form-control" id="signinEmail" name="correo" placeholder="name@example.com" required>
           <label for="signinEmail">Correo electrónico</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="signinPassword" name="password" placeholder="Password" required>
+          <input type="password" class="form-control" id="signinPassword" name="clave" placeholder="Password" required>
           <label for="signinPassword">Contraseña</label>
         </div>
         <div class="checkbox mb-3">

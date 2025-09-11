@@ -3,9 +3,8 @@ from config import config
 from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
 from models.entities.User import User
-from models.ModelUser import ModelUser 
+from models.ModelUser import ModelUser
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-
 
 nexoApp = Flask(__name__)
 nexoApp.config.from_object(config['development'])
@@ -13,7 +12,7 @@ db = MySQL(nexoApp)
 
 signinManager = LoginManager()
 signinManager.init_app(nexoApp)
-signinManager.login_view = "signin" 
+signinManager.login_view = "signin"
 
 @signinManager.user_loader
 def load_user(user_id):
@@ -23,17 +22,27 @@ def load_user(user_id):
 def home():
     return render_template('home.html')
 
-
 @nexoApp.route('/signin', methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
         correo = request.form.get("correo")
         clave = request.form.get("clave")
-        
-        print(f"Iniciar sesión con: {correo}, {clave}")
-        return redirect(url_for("home"))
-    return render_template('signin.html')
 
+        usuario = User(0, None, correo, clave, None)
+        UsuarioAutenticado = ModelUser.signin(db, usuario)
+
+        if UsuarioAutenticado is not None:
+            login_user(UsuarioAutenticado)
+
+            if UsuarioAutenticado.perfil == 'A':
+                return render_template('admin.html')
+            else:
+                return render_template('user.html')
+        else:
+            print(f"Error: usuario o clave incorrectos -> {correo}, {clave}")
+            return render_template("signin.html", error="Usuario o contraseña incorrectos")
+
+    return render_template('signin.html')
 
 @nexoApp.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -44,18 +53,12 @@ def signup():
         telefono = request.form.get("telefono")
         direccion = request.form.get("direccion")
 
-        
         if not nombre or not correo or not clave or not telefono or not direccion:
             return "Faltan datos en el formulario", 400
 
-        
         claveCifrada = generate_password_hash(clave)
-        perfil = 'U'  
+        perfil = 'U'
 
-        
-        print("Datos a insertar:", nombre.upper(), correo, claveCifrada, telefono, direccion, perfil)
-
-        
         cursor = db.connection.cursor()
         cursor.execute(
             "INSERT INTO usuario (nombre, correo, clave, telefono, direccion, perfil) VALUES (%s, %s, %s, %s, %s, %s)",
@@ -68,6 +71,11 @@ def signup():
 
     return render_template('signup.html')
 
+@nexoApp.route('/signout')
+@login_required
+def signout():
+    logout_user()
+    return redirect(url_for("signin"))
 
 if __name__ == '__main__':
     nexoApp.run(debug=True, port=7777)

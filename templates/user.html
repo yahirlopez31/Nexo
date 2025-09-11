@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block titulo %} Tienda Local {% endblock %}
+{% block titulo %} admin{% endblock %}
 {% block contenido %}
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
+          <a class="nav-link active" aria-current="page" href="/">
             <i class="fa-solid fa-house-chimney-user"></i>
             Home
           </a>
@@ -34,23 +34,29 @@
         </li>
 
         {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signout">
-              <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión (
-              {% if current_user.perfil == 'A' %}Admin{% else %}{{ current_user.nombre }}{% endif %})
-            </a>
-          </li>
+        <!-- Usuario con sesión -->
+        <li class="nav-item">
+          <a class="nav-link disabled">
+            <i class="fa-solid fa-user"></i> {{ current_user.nombre }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{{ url_for('signout') }}">
+            <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+          </a>
+        </li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">
-              <i class="fa-solid fa-circle-user"></i> Registrarse
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signin">
-              <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
-            </a>
-          </li>
+        <!-- Invitado -->
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('signup') }}">
+            <i class="fa-solid fa-circle-user"></i> Registrarse
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('signin') }}">
+            <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+          </a>
+        </li>
         {% endif %}
       </ul>
 
