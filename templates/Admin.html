@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block titulo %} Tienda Local {% endblock %}
+{% block titulo %} Administrador {% endblock %}
 {% block contenido %}
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -34,7 +34,7 @@
         </li>
 
         {% if current_user.is_authenticated %}
-        <!-- Usuario con sesión -->
+
         <li class="nav-item">
           <a class="nav-link disabled">
             <i class="fa-solid fa-user"></i> {{ current_user.nombre }}
@@ -46,7 +46,7 @@
           </a>
         </li>
         {% else %}
-        <!-- Invitado -->
+        
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('signup') }}">
             <i class="fa-solid fa-circle-user"></i> Registrarse

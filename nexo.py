@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from config import config
 from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
@@ -40,7 +40,8 @@ def signin():
                 return render_template('user.html')
         else:
             print(f"Error: usuario o clave incorrectos -> {correo}, {clave}")
-            return render_template("signin.html", error="Usuario o contraseña incorrectos")
+            flash('Contraseña incorrecta')
+            return redirect(request.url)
 
     return render_template('signin.html')
 
@@ -76,6 +77,7 @@ def signup():
 def signout():
     logout_user()
     return redirect(url_for("signin"))
+
 
 if __name__ == '__main__':
     nexoApp.run(debug=True, port=7777)
