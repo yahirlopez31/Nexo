@@ -40,7 +40,7 @@ def signin():
                 return render_template('user.html')
         else:
             print(f"Error: usuario o clave incorrectos -> {correo}, {clave}")
-            flash('Contraseña incorrecta')
+            flash('Usuario o contraseña incorrectos')
             return redirect(request.url)
 
     return render_template('signin.html')
@@ -79,5 +79,20 @@ def signout():
     return redirect(url_for("signin"))
 
 
+@nexoApp.route('/sUsuario', methods=['POST','GET'])
+def sUsuario():
+    selUsuario = db.connection.cursor()
+    selUsuario.execute("SELECT * FROM usuario")
+    u = selUsuario.fetchall()
+    selUsuario.close()
+    return render_template('Users.html', usuarios=u) 
+
+
+@nexoApp.route('/operaciones')
+@login_required
+def operaciones():
+    return render_template('operaciones.html')
+
 if __name__ == '__main__':
+    nexoApp.config.from_object(config['development'])
     nexoApp.run(debug=True, port=7777)

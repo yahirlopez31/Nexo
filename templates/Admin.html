@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
-{% block titulo %} Administrador {% endblock %}
+{% block titulo %}Administrador{% endblock %}
 {% block contenido %}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Admin</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,69 +13,37 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">
-            <i class="fa-solid fa-house-chimney-user"></i>
-            Home
+          <a class="nav-link active" href="/">
+            <i class="fa-solid fa-house-chimney-user"></i> Home
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">+</a>
-        </li>
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="operacionesDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Operaciones
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu" aria-labelledby="operacionesDropdown">
+            <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
+            <li><a class="dropdown-item" href="#">Otra acción</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Algo más</a></li>
           </ul>
         </li>
 
-        {% if current_user.is_authenticated %}
-
-        <li class="nav-item">
-          <a class="nav-link disabled">
-            <i class="fa-solid fa-user"></i> {{ current_user.nombre }}
-          </a>
-        </li>
         <li class="nav-item">
           <a class="nav-link text-danger" href="{{ url_for('signout') }}">
             <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
           </a>
         </li>
-        {% else %}
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('signup') }}">
-            <i class="fa-solid fa-circle-user"></i> Registrarse
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('signin') }}">
-            <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
-          </a>
-        </li>
-        {% endif %}
       </ul>
-
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+<div class="container mt-4">
+  <h2>Bienvenido, {{ current_user.nombre }}</h2>
+  <p>Este es tu panel de administrador. Usa el menú Operaciones para navegar.</p>
+</div>
 
 {% endblock %}

@@ -1,5 +1,5 @@
-import hashlib
 from flask_login import UserMixin
+from werkzeug.security import check_password_hash
 
 class User(UserMixin):
     def __init__(self, id, nombre, correo, clave, perfil):
@@ -15,8 +15,6 @@ class User(UserMixin):
     @staticmethod
     def validarClave(hash_db, clave_input):
         """
-        Compara la clave en texto plano con el hash guardado en la base de datos.
-        Usa SHA256 para validar.
+        Compara la clave ingresada con el hash almacenado en la BD (pbkdf2:sha256).
         """
-        hash_input = hashlib.sha256(clave_input.encode('utf-8')).hexdigest()
-        return hash_input == hash_db
+        return check_password_hash(hash_db, clave_input)
