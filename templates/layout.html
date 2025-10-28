@@ -1,72 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}{% endblock %}</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
-</head>
+{% extends "layout_operaciones.html" %}
+{% block titulo %}Operaciones{% endblock %}
 
-<body>
+{% block contenido %}
+<h3 class="mb-3 text-center">Lista de Usuarios</h3>
 
-  {% block contenido %}{% endblock %}
-
-  <!-- Carrusel -->
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{{ url_for('static', filename='img/quesitos.png') }}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="{{ url_for('static', filename='img/quesitos.png') }}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="{{ url_for('static', filename='img/tamalesxd.png') }}" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-  <!-- Footer -->
-  <footer class="text-center text-white" style="background-color: #0a4275;">
-    <div class="container p-4 pb-0">
-      <section class="">
-        <p class="d-flex justify-content-center align-items-center">
-          <span class="me-3">Register for free</span>
-          <button type="button" class="btn btn-outline-light btn-rounded">Sign up!</button>
-        </p>
-      </section>
-    </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2025 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-  </footer>
-
-  <!-- Bootstrap Bundle JS (incluye Popper) -->
-  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-  <!-- FontAwesome JS -->
-  <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
-
-</body>
-</html>
+<table class="table table-striped table-bordered text-center align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>NOMBRE</th>
+      <th>CORREO</th>
+      <th>CLAVE</th>
+      <th>PERFIL</th>
+      <th colspan="2">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in usuarios %}
+      <tr>
+        <td>{{ u[0] }}</td>
+        <td>{{ u[1] }}</td>
+        <td>{{ u[2] }}</td>
+        <td>{{ u[3] }}</td>
+        <td>{{ u[4] }}</td>
+        <td>
+          <a href="{{ url_for('editar_usuario', id=u[0]) }}" class="btn btn-warning btn-sm">
+            <i class="fa-solid fa-pen-to-square"></i> Editar
+          </a>
+        </td>
+        <td>
+          <a href="{{ url_for('eliminar_usuario', id=u[0]) }}" class="btn btn-danger btn-sm"
+             onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
+            <i class="fa-solid fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

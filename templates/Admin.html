@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
-{% block titulo %}Administrador{% endblock %}
-{% block contenido %}
 
+{% block titulo %}Administrador{% endblock %}
+
+{% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Admin</a>
@@ -19,7 +20,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="operacionesDropdown" role="button"
+          <a class="nav-link dropdown-toggle" href="#" id="operacionesDropdown" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
             Operaciones
           </a>
@@ -40,10 +41,11 @@
     </div>
   </div>
 </nav>
+{% endblock %}
 
+{% block contenido %}
 <div class="container mt-4">
   <h2>Bienvenido, {{ current_user.nombre }}</h2>
   <p>Este es tu panel de administrador. Usa el menú Operaciones para navegar.</p>
 </div>
-
 {% endblock %}

@@ -34,12 +34,13 @@ def signin():
         if UsuarioAutenticado is not None:
             login_user(UsuarioAutenticado)
 
+            # 🔹 Redirige según perfil
             if UsuarioAutenticado.perfil == 'A':
-                return render_template('admin.html')
+                return redirect(url_for('operaciones'))  # Admin
             else:
-                return render_template('user.html')
+                return redirect(url_for('sUsuario'))     # Usuario normal
+
         else:
-            print(f"Error: usuario o clave incorrectos -> {correo}, {clave}")
             flash('Usuario o contraseña incorrectos')
             return redirect(request.url)
 
@@ -91,7 +92,31 @@ def sUsuario():
 @nexoApp.route('/operaciones')
 @login_required
 def operaciones():
-    return render_template('operaciones.html')
+    cursor = db.connection.cursor()
+    cursor.execute("SELECT * FROM usuario")
+    usuarios = cursor.fetchall()
+    cursor.close()
+    return render_template('operaciones.html', usuarios=usuarios)
+
+
+@nexoApp.route('/iUsuario', methods=['POST','GET'])
+def iUsuario():
+    nombre = request.form['nombre']
+    correo = request.form['correo']
+    clave = request.form['clave']
+    claveCifrada = generate_password_hash(clave)
+    perfil = request.form['perfil']
+    
+    insUsuario = db.connection.cursor()
+    insUsuario.execute(
+        "INSERT INTO usuario (nombre, correo, clave, perfil) VALUES (%s, %s, %s, %s)",
+        (nombre, correo, claveCifrada, perfil)
+    )
+    db.connection.commit()
+    insUsuario.close()
+    flash('Cuenta creada exitosamente')
+    return redirect(url_for('sUsuario'))
+
 
 if __name__ == '__main__':
     nexoApp.config.from_object(config['development'])

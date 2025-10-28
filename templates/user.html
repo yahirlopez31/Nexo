@@ -1,179 +1,77 @@
 {% extends "layout.html" %}
-{% block titulo %}  administrador {% endblock %}
-{% block contenido %}
 
+{% block titulo %}
+¡Hola!
+{% endblock %}
+
+{% block contenido %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Home -->
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <i class="fa-solid fa-house fa-bounce"></i>
-          <link rel="stylesheet" href="{{ url_for('static',filename='css/all.min.css".css')}}"">
-          <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}"">
-            Home</a>
+          <a class="nav-link" href="/">
+            <i class="fa-solid fa-house-chimney-window fa-beat fa-xs" style="color: #1c1c1c;"></i>
+            Home
+          </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Dropdown
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/susuario">Usuarios</a></li>
+            <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+
+        <!-- Registrate sin disabled -->
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="/signup">
+            Registrate
+            <i class="fa-regular fa-user fa-bounce" style="color: #3f1556;"></i>
+          </a>
         </li>
+
+        <!-- Inicio de sesión -->
+        <li class="nav-item">
+          <a class="nav-link" href="/signout">{{current_user.nombre}}</a>
+            Cerrar sesión
+            <i class="fa-solid fa-right-to-bracket" style="color: #0d6efd;"></i>
+          </a>
+        </li>
+
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Search</button>
-
       </form>
     </div>
   </div>
 </nav>
-<div class="container">
-  <table class="table table-hover">
-    <thead>
-      <th>ID</th>
-      <th>NOMBRE</th>
-      <th>CORREO</th>
-      <th>CLAVE</th>
-      <th>PERFIL</th>
-      <th colpan="2"> 
-        <!-- Button insert -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">
-     <i class="fa-solid fa-user-plus" style="color: #63E6BE;"></i>
-      NUEVO USUARIO
-    </button>
 
-    
-      </th>
-    </thead>
-    <!-- Button insert -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">
-     <i class="fa-solid fa-user-plus" style="color: #63E6BE;"></i>
-      NUEVO USUARIO
-    </button>
-
-    <!-- Modal insert -->
-    <div class="modal fade" id="insertModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear nuevo Usuario</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form action="'/iUsuario" method="POST"
-          <div class="modal-body">
-            <!--Nombre Completo-->
-            <div class="form-floating mb-3">
-            <input type="text" name="nombre" class="form-control" id="floatingNombre" placeholder="--Nombre">
-            <label for="floatingNombret">Nombre Completo</label>
-          </div>
-           <!--Correo Electronico-->
-            <div class="form-floating mb-3">
-            <input type="email" name="correo" class="form-control" id="floatingInput" placeholder="--Nombre">
-            <label for="floatingInput">Correo Electronico--</label>
-          </div>
-          <!--Perfil-->
-           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Clave">
-            <label for="floatingPassword">Contraseña</label>
-           </div>
-           
-           <!--clave-->
-           <div class="form-floating">
-            <label for="floatingPerfil">--Perfil</label>
-           </div>-->
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          </div>
-        </form>
-        </div>
-      </div>
-    </div>
-    
-    <select name="perfil" aria-label="Default select example">
-  <option selected>Selecciona un perfil</option>
-  <option value="A">administrador</option>
-  <option value="2"Usuario</option>
-</select>
-
-    <tbody>
-      {% for u in usuarios %}
-      <tr>
-        <td>{{u[0]}}</td>
-        <td>{{u[1]}}</td>
-        <td>{{u[2]}}</td>
-        <td>{{u[3]|truncate(25)}}</td>
-        <td>{{u[4]}}</td>
-        <td>
-          <!-- Button Editar -->
-          button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{u[0]}}">
-          <i class="fa-solid fa-user-pen"></i>
-          Editar
-          </button>
-        </td>
-        <td> </td>
-      </tr>
-      
-
-      <!-- Modal Editar -->
-      <div class="modal fade" id="editar{{u[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Usuario</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="/uUsuario" method="post">
-            <div class="modal-body">
-              <!-- Nombre -->
-              <label for="inputPassword5" class="form-label">Nombre</label>
-              <input type="nombre" id="inputPassword5" class="form-control" aria-describedby="nombrecompleto">
-              <div id="nombrecompleto" class="form-text">
-                Introduce un nombre completo
-              </div>
-            </div>
-              <!-- Correo -->
-              <label for="correo" class="form-label">Correo</label>
-              <input type="email" id="correo" class="form-control" aria-describedby="ayudacorreo">
-              <div id="ayudacorreo" class="form-text">
-                Introduce un correo
-              </div>
-            </div>
-              <!-- Clave -->
-            <label for="inputPassword5" class="form-label">Password</label>
-            <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-            <div id="passwordHelpBlock" class="form-text">
-              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 {% endblock %}
