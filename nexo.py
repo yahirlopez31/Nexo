@@ -34,11 +34,10 @@ def signin():
         if UsuarioAutenticado is not None:
             login_user(UsuarioAutenticado)
 
-            # 🔹 Redirige según perfil
             if UsuarioAutenticado.perfil == 'A':
-                return redirect(url_for('operaciones'))  # Admin
+                return redirect(url_for('operaciones'))
             else:
-                return redirect(url_for('sUsuario'))     # Usuario normal
+                return redirect(url_for('sUsuario'))
 
         else:
             flash('Usuario o contraseña incorrectos')
@@ -80,6 +79,9 @@ def signout():
     return redirect(url_for("signin"))
 
 
+# ==========================================
+#        CONSULTA DE USUARIOS
+# ==========================================
 @nexoApp.route('/sUsuario', methods=['POST','GET'])
 def sUsuario():
     selUsuario = db.connection.cursor()
@@ -89,6 +91,64 @@ def sUsuario():
     return render_template('Users.html', usuarios=u) 
 
 
+# ==========================================
+#         INSERTAR USUARIO
+# ==========================================
+@nexoApp.route('/insertar_usuario', methods=['POST'])
+def insertar_usuario():
+    usuario = request.form['usuario']
+    clave = request.form['clave']
+    perfil = request.form['perfil']
+
+    cursor = db.connection.cursor()
+    cursor.execute("INSERT INTO usuario (usuario, clave, perfil) VALUES (%s, %s, %s)",
+                   (usuario, clave, perfil))
+    db.connection.commit()
+    cursor.close()
+
+    flash("Usuario insertado correctamente")
+    return redirect(url_for('sUsuario'))
+
+
+# ==========================================
+#         ACTUALIZAR USUARIO
+# ==========================================
+@nexoApp.route('/uUsuario/<int:id>', methods=['POST'])
+def uUsuario(id):
+    usuario = request.form['usuario']
+    clave = request.form['clave']
+    perfil = request.form['perfil']
+
+    cursor = db.connection.cursor()
+    cursor.execute("""
+        UPDATE usuario 
+        SET usuario=%s, clave=%s, perfil=%s 
+        WHERE id=%s
+    """, (usuario, clave, perfil, id))
+
+    db.connection.commit()
+    cursor.close()
+
+    flash('Usuario actualizado')
+    return redirect(url_for('sUsuario'))
+
+
+# ==========================================
+#             ELIMINAR
+# ==========================================
+@nexoApp.route('/dUsuario/<int:id>', methods=['POST','GET'])
+def dUsuario(id):
+    delUsuario = db.connection.cursor()
+    delUsuario.execute("DELETE FROM usuario WHERE id=%s",(id,))
+    db.connection.commit()
+    delUsuario.close()
+    flash('Usuario eliminado')
+    return redirect(url_for('sUsuario'))
+
+
+# ==========================================
+#             OPERACIONES
+# ==========================================
 @nexoApp.route('/operaciones')
 @login_required
 def operaciones():
@@ -97,25 +157,6 @@ def operaciones():
     usuarios = cursor.fetchall()
     cursor.close()
     return render_template('operaciones.html', usuarios=usuarios)
-
-
-@nexoApp.route('/iUsuario', methods=['POST','GET'])
-def iUsuario():
-    nombre = request.form['nombre']
-    correo = request.form['correo']
-    clave = request.form['clave']
-    claveCifrada = generate_password_hash(clave)
-    perfil = request.form['perfil']
-    
-    insUsuario = db.connection.cursor()
-    insUsuario.execute(
-        "INSERT INTO usuario (nombre, correo, clave, perfil) VALUES (%s, %s, %s, %s)",
-        (nombre, correo, claveCifrada, perfil)
-    )
-    db.connection.commit()
-    insUsuario.close()
-    flash('Cuenta creada exitosamente')
-    return redirect(url_for('sUsuario'))
 
 
 if __name__ == '__main__':
