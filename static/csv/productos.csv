@@ -1,0 +1,51 @@
+id,nombre,descripcion,precio,stock,catalogo,imagen
+1,Pan Casero,[translate:Pan casero recién horneado, con textura suave y corteza dorada],25.50,150,Comida Casera,Pan_Casero.jpg
+2,Arroz Integral,[translate:Arroz integral de calidad, perfecto para platillos saludables],18.00,200,Abarrotes,Arroz_Integral.jpg
+3,Frijoles Negros,[translate:Frijoles negros tradicionales, ricos en proteínas y sabor],20.00,180,Abarrotes,Frijoles_Negros.jpg
+4,Salsa de Tomate,[translate:Salsa de tomate natural, sin conservadores],22.50,130,Comida Casera,Salsa_de_Tomate.jpg
+5,Tamales de Elote,[translate:Tamales de elote dulces y suaves, receta tradicional],30.00,90,Comida Casera,Tamales_de_Elote.jpg
+6,Queso Fresco,[translate:Queso fresco artesanal, con sabor auténtico mexicano],45.00,75,Abarrotes,Queso_Fresco.jpg
+7,Mole Poblano,[translate:Mole poblano casero con ingredientes seleccionados],55.00,60,Comida Casera,Mole_Poblano.jpg
+8,Jitomate Saladet,[translate:Jitomate saladet fresco para ensaladas y salsas],12.00,220,Abarrotes,Jitomate_Saladet.jpg
+9,Café de Olla,[translate:Café de olla tradicional con canela y piloncillo],40.00,100,Comida Casera,Cafe_de_Olla.jpg
+10,Aceite de Oliva,[translate:Aceite de oliva extra virgen, de primera calidad],70.00,40,Abarrotes,Aceite_de_Oliva.jpg
+11,Tortillas de Maíz,[translate:Tortillas de maíz frescas hechas a mano],15.00,300,Comida Casera,Tortillas_de_Maiz.jpg
+12,Chiles Poblanos,[translate:Chiles poblanos frescos para guisos y rellenos],18.50,160,Abarrotes,Chiles_Poblanos.jpg
+13,Huevos de Rancho,[translate:Huevos frescos de rancho, alta calidad y sabor],35.00,140,Abarrotes,Huevos_de_Rancho.jpg
+14,Sopa de Fideo,[translate:Sopa de fideo casera con tomate y especias],28.00,120,Comida Casera,Sopa_de_Fideo.jpg
+15,Pan Dulce,[translate:Pan dulce variado, hecho con receta tradicional],22.00,155,Comida Casera,Pan_Dulce.jpg
+16,Jabón de Tierra,[translate:Jabón de tierra artesanal para limpieza],15.00,90,Abarrotes,Jabon_de_Tierra.jpg
+17,Leche Entera,[translate:Leche entera pasteurizada, fresca y natural],25.00,200,Abarrotes,Leche_Entera.jpg
+18,Chorizo Casero,[translate:Chorizo casero con especias naturales],60.00,75,Comida Casera,Chorizo_Casero.jpg
+19,Mermelada de Fresa,[translate:Mermelada de fresa natural sin conservadores],35.50,85,Comida Casera,Mermelada_de_Fresa.jpg
+20,Azúcar Orgánica,[translate:Azúcar orgánica de caña, sin químicos],20.00,180,Abarrotes,Azucar_Organica.jpg
+21,Pan Integral,[translate:Pan integral con semillas, saludable y delicioso],28.00,140,Comida Casera
+22,Queso Oaxaca,[translate:Queso Oaxaca fresco y artesanal],48.00,65,Abarrotes
+23,Salsa Verde,[translate:Salsa verde casera con tomatillo y chile],25.00,130,Comida Casera
+24,Cilantro Fresco,[translate:Cilantro fresco para aderezar tus platillos],10.00,210,Abarrotes
+25,Caldillo de Res,[translate:Caldillo de res casero, con verduras frescas],55.00,50,Comida Casera
+26,Tamales de Rajas,[translate:Tamales de rajas con queso, receta tradicional],30.50,95,Comida Casera
+27,Manteca de Cerdo,[translate:Manteca de cerdo pura para cocinar],30.00,70,Abarrotes
+28,Espinacas Frescas,[translate:Espinacas frescas y crujientes, para ensaladas y guisos],15.00,170,Abarrotes
+29,Bizcocho Casero,[translate:Bizcocho casero esponjoso y dulce],25.00,130,Comida Casera
+30,Chiles en Nogada,[translate:Chiles en nogada tradicionales con receta auténtica],70.00,40,Comida Casera
+31,Caldo de Pollo,[translate:Caldo de pollo casero con verduras frescas],45.00,90,Comida Casera
+32,Frutas Secas,[translate:Mezcla de frutas secas naturales y sin azúcar],60.00,60,Abarrotes
+33,Tortilla de Harina,[translate:Tortilla de harina casera, suave y tibia],18.00,180,Comida Casera
+34,Cebolla Blanca,[translate:Cebolla blanca fresca, para cocinar y ensaladas],12.00,220,Abarrotes
+35,Avena Natural,[translate:Avena natural sin azúcar para preparar desayuno],20.00,190,Abarrotes
+36,Café Orgánico,[translate:Café orgánico molido, aroma intenso],75.00,50,Abarrotes
+37,Pan de Muerto,[translate:Pan de muerto tradicional para festividades],35.00,85,Comida Casera
+38,Salsa de Chile,[translate:Salsa de chile roja casera, picante y sabrosa],22.50,140,Comida Casera
+39,Jamón de Pavo,[translate:Jamón de pavo natural para sándwiches],50.00,80,Abarrotes
+40,Lechuga Romana,[translate:Lechuga romana fresca para ensaladas],18.00,170,Abarrotes
+41,Pollo Rostizado,[translate:Pollo rostizado casero, jugoso y bien condimentado],85.00,45,Comida Casera
+42,Tomate Cherry,[translate:Tomate cherry dulce y fresco],25.00,160,Abarrotes
+43,Pan de Caja,[translate:Pan de caja integral y suave],20.00,190,Comida Casera
+44,Queso Manchego,[translate:Queso manchego curado con sabor fuerte],55.00,50,Abarrotes
+45,Frijoles Bayos,[translate:Frijoles bayos seleccionados, cocidos y secos],22.00,150,Abarrotes
+46,Calabacitas,[translate:Calabacitas frescas para guisos],15.00,200,Abarrotes
+47,Puré de Papa,[translate:Puré de papa casero y cremoso],30.00,100,Comida Casera
+48,Agua de Horchata,[translate:Agua de horchata natural con canela],20.00,110,Comida Casera
+49,Hongo Portobello,[translate:Hongo portobello fresco y firme],40.00,70,Abarrotes
+50,Chiles Jalapeños,[translate:Chiles jalapeños frescos y picantes],15.00,185,Abarrotes
