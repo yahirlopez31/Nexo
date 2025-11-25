@@ -4,18 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block titulo %}{% endblock %}</title>
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-  <!-- FontAwesome -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
 </head>
 <body>
-  <!-- Solo el contenido -->
+
+  <!-- NAVBAR GLOBAL -->
+  {% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        ADMIN
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sUsuario') }}">Usuarios</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sProductos') }}">Productos</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('operaciones') }}">Admin</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+
+  <!-- Contenido -->
   <main class="container mt-5">
     {% block contenido %}{% endblock %}
   </main>
 
-  <!-- Bootstrap Bundle JS -->
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
 </body>

@@ -1,0 +1,93 @@
+{% extends "layout_operaciones.html" %}
+{% block titulo %}Productos{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    <h3 class="mb-4">Productos Registrados</h3>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for p in productos %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% if p[6] %} {# p[6] es la columna imagen en tu CSV #}
+                <img src="{{ url_for('static', filename='img/' ~ p[6]) }}" class="card-img-top" alt="{{ p[1] }}" style="height:200px; object-fit:cover; cursor:pointer;" data-bs-toggle="modal" data-bs-target="#imagenModal{{ p[0] }}">
+                {% else %}
+                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height:200px;">
+                    Sin Imagen
+                </div>
+                {% endif %}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ p[1] }}</h5>
+                    <p class="card-text">{{ p[2] }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ p[3] }}</p>
+                    <p class="card-text"><strong>Stock:</strong> {{ p[4] }}</p>
+                </div>
+                
+                <div class="card-footer d-flex justify-content-between">
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateProductoModal{{ p[0] }}">Editar</button>
+                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProductoModal" data-id="{{ p[0] }}" data-nombre="{{ p[1] }}">Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL IMAGEN GRANDE -->
+        {% if p[6] %}
+        <div class="modal fade" id="imagenModal{{ p[0] }}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <img src="{{ url_for('static', filename='img/' ~ p[6]) }}" class="w-100" alt="{{ p[1] }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- MODAL ELIMINAR PRODUCTO -->
+<div class="modal fade" id="deleteProductoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="POST" id="formDeleteProducto">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Eliminar Producto</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>¿Está seguro que desea eliminar este producto?</p>
+                    <h4 id="deleteProductoName" class="fw-bold text-danger"></h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var deleteProductoModal = document.getElementById('deleteProductoModal');
+
+    deleteProductoModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-id');
+        var nombre = button.getAttribute('data-nombre');
+
+        document.getElementById('deleteProductoName').textContent = nombre;
+        document.getElementById('formDeleteProducto').action = "/dProducto/" + id;
+    });
+});
+</script>
+
+{% endblock %}

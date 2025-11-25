@@ -14,23 +14,24 @@
     </div>
     <div class="col-md-10 mx-auto col-lg-5">
 
-      {% if error %}
-      <div class="alert alert-danger" role="alert">
-        {{ error }}
-      </div>
+      {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+          {% for m in mensajes %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{ m }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% if perfil_debug %}
+        <div class="alert alert-info" role="alert">
+          Perfil detectado: <strong>{{ perfil_debug }}</strong>
+        </div>
       {% endif %}
 
       <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary" method="POST" action="/signin">
-        {% with mensajes = get_flashed_messages() %}
-          {% if mensajes %}
-            {% for m in mensajes %}
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ m }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
         <div class="form-floating mb-3">
           <input type="email" class="form-control" id="signinEmail" name="correo" placeholder="name@example.com" required>
           <label for="signinEmail">Correo electrónico</label>

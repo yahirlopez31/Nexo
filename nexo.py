@@ -34,10 +34,13 @@ def signin():
         if UsuarioAutenticado is not None:
             login_user(UsuarioAutenticado)
 
+            # 👇 AQUÍ CAMBIAMOS EL REDIRECT
             if UsuarioAutenticado.perfil == 'A':
+                # Admin → panel de operaciones
                 return redirect(url_for('operaciones'))
             else:
-                return redirect(url_for('sUsuario'))
+                # Usuario normal → su propia página
+                return redirect(url_for('user_home'))
 
         else:
             flash('Usuario o contraseña incorrectos')
@@ -78,11 +81,20 @@ def signout():
     logout_user()
     return redirect(url_for("signin"))
 
+# ==========================================
+#    PÁGINA PRINCIPAL DEL USUARIO NORMAL
+# ==========================================
+@nexoApp.route('/user_home')
+@login_required
+def user_home():
+    # Asegúrate de que el archivo se llame 'user.html' en tu carpeta templates
+    return render_template('user.html')
 
 # ==========================================
-#        CONSULTA DE USUARIOS
+#        CONSULTA DE USUARIOS (ADMIN)
 # ==========================================
 @nexoApp.route('/sUsuario', methods=['POST','GET'])
+@login_required
 def sUsuario():
     selUsuario = db.connection.cursor()
     selUsuario.execute("SELECT * FROM usuario")
@@ -90,11 +102,11 @@ def sUsuario():
     selUsuario.close()
     return render_template('Users.html', usuarios=u) 
 
-
 # ==========================================
 #         INSERTAR USUARIO
 # ==========================================
 @nexoApp.route('/insertar_usuario', methods=['POST'])
+@login_required
 def insertar_usuario():
     usuario = request.form['usuario']
     clave = request.form['clave']
@@ -109,11 +121,11 @@ def insertar_usuario():
     flash("Usuario insertado correctamente")
     return redirect(url_for('sUsuario'))
 
-
 # ==========================================
 #         ACTUALIZAR USUARIO
 # ==========================================
 @nexoApp.route('/uUsuario/<int:id>', methods=['POST'])
+@login_required
 def uUsuario(id):
     usuario = request.form['usuario']
     clave = request.form['clave']
@@ -132,11 +144,11 @@ def uUsuario(id):
     flash('Usuario actualizado')
     return redirect(url_for('sUsuario'))
 
-
 # ==========================================
-#             ELIMINAR
+#             ELIMINAR USUARIO
 # ==========================================
 @nexoApp.route('/dUsuario/<int:id>', methods=['POST','GET'])
+@login_required
 def dUsuario(id):
     delUsuario = db.connection.cursor()
     delUsuario.execute("DELETE FROM usuario WHERE id=%s",(id,))
@@ -145,9 +157,8 @@ def dUsuario(id):
     flash('Usuario eliminado')
     return redirect(url_for('sUsuario'))
 
-
 # ==========================================
-#             OPERACIONES
+#             OPERACIONES (ADMIN)
 # ==========================================
 @nexoApp.route('/operaciones')
 @login_required
@@ -158,6 +169,17 @@ def operaciones():
     cursor.close()
     return render_template('operaciones.html', usuarios=usuarios)
 
+# ==========================================
+#         CONSULTA DE PRODUCTOS
+# ==========================================
+@nexoApp.route('/sProductos', methods=['POST','GET'])
+@login_required
+def sProductos():
+    selProducto = db.connection.cursor()
+    selProducto.execute("SELECT * FROM productos")
+    p = selProducto.fetchall()
+    selProducto.close()
+    return render_template('productos.html', productos=p)
 
 if __name__ == '__main__':
     nexoApp.config.from_object(config['development'])

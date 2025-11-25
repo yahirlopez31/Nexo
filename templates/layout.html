@@ -2,6 +2,13 @@
 {% block titulo %}Operaciones{% endblock %}
 
 {% block contenido %}
+
+{% if current_user.perfil != 'A' %}
+  <div class="alert alert-danger text-center mt-4">
+    🚫 No tienes permisos para ver esta sección.
+  </div>
+{% else %}
+
 <h3 class="mb-3 text-center">Lista de Usuarios</h3>
 
 <table class="table table-striped table-bordered text-center align-middle">
@@ -10,26 +17,30 @@
       <th>ID</th>
       <th>NOMBRE</th>
       <th>CORREO</th>
-      <th>CLAVE</th>
       <th>PERFIL</th>
       <th colspan="2">Acciones</th>
     </tr>
   </thead>
+
   <tbody>
     {% for u in usuarios %}
       <tr>
         <td>{{ u[0] }}</td>
         <td>{{ u[1] }}</td>
         <td>{{ u[2] }}</td>
-        <td>{{ u[3] }}</td>
-        <td>{{ u[4] }}</td>
+        <td>{{ u[5] }}</td>
+
         <td>
-          <a href="{{ url_for('editar_usuario', id=u[0]) }}" class="btn btn-warning btn-sm">
-            <i class="fa-solid fa-pen-to-square"></i> Editar
-          </a>
+          <form action="{{ url_for('uUsuario', id=u[0]) }}" method="POST">
+            <button class="btn btn-warning btn-sm">
+              <i class="fa-solid fa-pen-to-square"></i> Editar
+            </button>
+          </form>
         </td>
+
         <td>
-          <a href="{{ url_for('eliminar_usuario', id=u[0]) }}" class="btn btn-danger btn-sm"
+          <a href="{{ url_for('dUsuario', id=u[0]) }}"
+             class="btn btn-danger btn-sm"
              onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
             <i class="fa-solid fa-trash"></i> Eliminar
           </a>
@@ -38,4 +49,7 @@
     {% endfor %}
   </tbody>
 </table>
+
+{% endif %}
+
 {% endblock %}

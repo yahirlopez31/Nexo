@@ -1,0 +1,40 @@
+{% extends "layout_operaciones.html" %}
+{% block titulo %}Galería de Fotos{% endblock %}
+
+{% block contenido %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">Galería de Fotos</h1>
+    <div class="row">
+        {% for foto in fotos %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{ url_for('static', filename=foto) }}" class="card-img-top" alt="{{ foto }}" data-bs-toggle="modal" data-bs-target="#fotoModal" data-foto="{{ url_for('static', filename=foto) }}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal para ver la foto grande -->
+<div class="modal fade" id="fotoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <img src="" id="fotoGrande" class="img-fluid w-100">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var fotoModal = document.getElementById('fotoModal');
+var fotoGrande = document.getElementById('fotoGrande');
+fotoModal.addEventListener('show.bs.modal', function (event) {
+    var img = event.relatedTarget;
+    fotoGrande.src = img.getAttribute('data-foto');
+});
+</script>
+{% endblock %}
