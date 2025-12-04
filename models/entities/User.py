@@ -18,3 +18,5 @@ class User(UserMixin):
         Compara la clave ingresada con el hash almacenado en la BD (pbkdf2:sha256).
         """
         return check_password_hash(hash_db, clave_input)
+
+

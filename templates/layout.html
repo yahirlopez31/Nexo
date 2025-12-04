@@ -1,55 +1,62 @@
-{% extends "layout_operaciones.html" %}
-{% block titulo %}Operaciones{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %}{% endblock %}</title>
 
-{% block contenido %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+</head>
+<body>
 
-{% if current_user.perfil != 'A' %}
-  <div class="alert alert-danger text-center mt-4">
-    🚫 No tienes permisos para ver esta sección.
-  </div>
-{% else %}
+  {% block navbar %}
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
 
-<h3 class="mb-3 text-center">Lista de Usuarios</h3>
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        Tienda Local
+      </a>
 
-<table class="table table-striped table-bordered text-center align-middle">
-  <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>NOMBRE</th>
-      <th>CORREO</th>
-      <th>PERFIL</th>
-      <th colspan="2">Acciones</th>
-    </tr>
-  </thead>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <tbody>
-    {% for u in usuarios %}
-      <tr>
-        <td>{{ u[0] }}</td>
-        <td>{{ u[1] }}</td>
-        <td>{{ u[2] }}</td>
-        <td>{{ u[5] }}</td>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
 
-        <td>
-          <form action="{{ url_for('uUsuario', id=u[0]) }}" method="POST">
-            <button class="btn btn-warning btn-sm">
-              <i class="fa-solid fa-pen-to-square"></i> Editar
-            </button>
-          </form>
-        </td>
 
-        <td>
-          <a href="{{ url_for('dUsuario', id=u[0]) }}"
-             class="btn btn-danger btn-sm"
-             onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
-            <i class="fa-solid fa-trash"></i> Eliminar
-          </a>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+          </li>
 
-{% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sProductos') }}">Productos</a>
+          </li>
 
-{% endblock %}
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signout') }}">Cerrar sesión</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signin') }}">Iniciar sesión</a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+  {% endblock %}
+
+  <main class="container mt-4">
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+
+</body>
+</html>

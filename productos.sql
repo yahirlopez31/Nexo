@@ -42,7 +42,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `catalogo`, `imagen`) VALUES
-(1, 'Pan Casero', 'Pan casero recién horneado, con textura suave y corteza dorada', 25.50, 150, 'Comida Casera', 'Pan_Casero.jpg'),
+(1, 'Pan Casero', 'Pan casero recién horneado, con textura suave y corteza dorada', 25.50, 150, 'Comida Casera', 'pan_casero.jpg'),
 (2, 'Arroz Integral', 'Arroz integral de calidad, perfecto para platillos saludables', 18.00, 200, 'Abarrotes', 'Arroz_Integral.jpg'),
 (3, 'Frijoles Negros', 'Frijoles negros tradicionales, ricos en proteínas y sabor', 20.00, 180, 'Abarrotes', 'Frijoles_Negros.jpg'),
 (4, 'Salsa de Tomate', 'Salsa de tomate natural, sin conservadores', 22.50, 130, 'Comida Casera', 'Salsa_de_Tomate.jpg'),

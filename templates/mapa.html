@@ -1,0 +1,35 @@
+{% extends "layout_normal.html" %}
+{% block titulo %}Mapa{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h3>Mapa interactivo</h3>
+
+    <!-- Contenedor del mapa -->
+    <div id="map" style="height: 500px; border-radius: 10px;"></div>
+</div>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Crear el mapa
+    var map = L.map('map').setView([20.6736, -103.344], 13);  
+    // Coordenadas de Guadalajara (ejemplo)
+
+    // Capa del mapa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    // Marcador
+    L.marker([20.6736, -103.344]).addTo(map)
+        .bindPopup('Estas en Guadalajara :)')
+        .openPopup();
+</script>
+
+{% endblock %}

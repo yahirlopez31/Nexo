@@ -1,75 +1,176 @@
 {% extends "layout.html" %}
-{% block titulo %} Tienda Local {% endblock %}
+{% block titulo %} Comida Casera Cerca de Ti {% endblock %}
 {% block contenido %}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand fw-bold" href="#">
+      <i class="fa-solid fa-utensils"></i> Comida Local
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            <i class="fa-solid fa-house-chimney-user"></i>
-            Home
-          </a>
+          <a class="nav-link active" href="/"><i class="fa-solid fa-house"></i> Inicio</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="#">+</a>
+          <a class="nav-link" href="/productos"><i class="fa-solid fa-bowl-food"></i> Menú</a>
         </li>
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Más</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Acerca del Local</a></li>
+            <li><a class="dropdown-item" href="#">Contacto</a></li>
           </ul>
         </li>
 
         {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signout">
-              <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión (
-              {% if current_user.perfil == 'A' %}Admin{% else %}{{ current_user.nombre }}{% endif %})
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="/signout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Cerrar Sesión ( {% if current_user.perfil == 'A' %}Admin{% else %}{{ current_user.nombre }}{% endif %} )
+          </a>
+        </li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">
-              <i class="fa-solid fa-circle-user"></i> Registrarse
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signin">
-              <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i> Registrarse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</a>
+        </li>
         {% endif %}
       </ul>
 
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Buscar comida, ingredientes..." />
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
       </form>
     </div>
   </div>
 </nav>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+<!-- Carrusel -->
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='img/comidacasera.jpg') }}" class="d-block w-80" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/comidacasera.jpg') }}" class="d-block w-80" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/comidacasera.jpg') }}" class="d-block w-80" alt="...">
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- HERO -->
+<section class="py-5 text-white" 
+         style="background: url('/static/img/comida-banner.jpg') center/cover;">
+  <div class="container text-center">
+    <h1 class="fw-bold">Comida Casera, Fresca y Cercana</h1>
+    <p class="fs-5">
+      Tamales, atole, quesos, salsas, tortillas... lo que vende tu tiendita de confianza.
+    </p>
+    <a href="/#menu" class="btn btn-light btn-lg mt-3">
+      Ver Menú <i class="fa-solid fa-arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<div class="container my-5">
+  <h3 class="mb-4 fw-semibold">Categorías de Comida</h3>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="col">
+      <div class="card text-center p-3 shadow-sm">
+        <i class="fa-solid fa-pepper-hot fa-3x mb-3"></i>
+        <h5>Antojitos</h5>
+        <small>Tamales, gorditas, quesadillas…</small>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-center p-3 shadow-sm">
+        <i class="fa-solid fa-cheese fa-3x mb-3"></i>
+        <h5>Lácteos</h5>
+        <small>Queso oaxaqueño, crema fresca, requesón</small>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-center p-3 shadow-sm">
+        <i class="fa-solid fa-mug-hot fa-3x mb-3"></i>
+        <h5>Bebidas</h5>
+        <small>Atole, café de olla, aguas frescas</small>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRODUCTOS DESTACADOS -->
+<div class="container mt-5" id="menu">
+  <h3 class="mb-4 fw-semibold">Lo más vendido</h3>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for p in productos %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+
+        <img src="{{ url_for('static', filename='img/' ~ (p[6] if p[6] else 'default-food.jpg')) }}"
+             class="card-img-top"
+             alt="Imagen del producto">
+
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ p[1] }}</h5>
+          <p class="card-text text-secondary">{{ p[2] }}</p>
+        </div>
+
+        <div class="card-footer bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-success">${{ p[3] }} MXN</span>
+            <a class="btn btn-sm btn-success" href="/producto/{{ p[0] }}">Ver</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- MENSAJE INFORMATIVO -->
+<div class="container mt-5">
+  <div class="alert alert-warning text-center fs-5 shadow-sm">
+    <i class="fa-solid fa-circle-info"></i>
+    Esta tienda NO tiene pedidos en línea. Solo mostramos lo que se vende en el local.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <p class="mb-0">© 2025 Comida Casera Local — Sabor que se siente como en casa.</p>
+</footer>
 
 {% endblock %}

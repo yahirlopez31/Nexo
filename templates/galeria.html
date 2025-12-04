@@ -8,7 +8,13 @@
         {% for foto in fotos %}
         <div class="col-md-4 mb-3">
             <div class="card">
-                <img src="{{ url_for('static', filename=foto) }}" class="card-img-top" alt="{{ foto }}" data-bs-toggle="modal" data-bs-target="#fotoModal" data-foto="{{ url_for('static', filename=foto) }}">
+                <!-- IMAGEN ARREGLADA -->
+                <img src="{{ url_for('static', filename='img/' ~ foto) }}" 
+                     class="card-img-top" 
+                     alt="{{ foto }}" 
+                     data-bs-toggle="modal" 
+                     data-bs-target="#fotoModal" 
+                     data-foto="{{ url_for('static', filename='img/' ~ foto) }}">
             </div>
         </div>
         {% endfor %}
@@ -32,6 +38,7 @@
 <script>
 var fotoModal = document.getElementById('fotoModal');
 var fotoGrande = document.getElementById('fotoGrande');
+
 fotoModal.addEventListener('show.bs.modal', function (event) {
     var img = event.relatedTarget;
     fotoGrande.src = img.getAttribute('data-foto');
